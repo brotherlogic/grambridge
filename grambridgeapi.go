@@ -26,7 +26,7 @@ var (
 	}, []string{"code"})
 )
 
-func buildContext() (context.Context, context.CancelFunc, error) {
+func buildContext(ctx context.Context) (context.Context, context.CancelFunc, error) {
 	dirname, err := os.UserHomeDir()
 	if err != nil {
 		return nil, nil, err
@@ -43,7 +43,7 @@ func buildContext() (context.Context, context.CancelFunc, error) {
 		return nil, nil, err
 	}
 
-	mContext := metadata.AppendToOutgoingContext(context.Background(), "auth-token", user.GetToken())
+	mContext := metadata.AppendToOutgoingContext(ctx, "auth-token", user.GetToken())
 	ctx, cancel := context.WithTimeout(mContext, time.Minute)
 	return ctx, cancel, nil
 }
@@ -55,17 +55,22 @@ func (s *Server) ClientUpdate(ctx context.Context, req *rcpb.ClientUpdateRequest
 	if err != nil {
 		return nil, err
 	}
+	defer conn.Close()
 
 	cglient := pbg.NewGramophileEServiceClient(conn)
 
 	conn2, err := s.FDialServer(ctx, "recordcollection")
+	if err != nil {
+		return nil, err
+	}
+	defer conn2.Close()
 	rcclient := rcpb.NewRecordCollectionServiceClient(conn2)
 	resp, err := rcclient.GetRecord(ctx, &rcpb.GetRecordRequest{InstanceId: req.GetInstanceId()})
 	if err != nil {
 		return nil, err
 	}
 
-	nctx, cancel, gerr := buildContext()
+	nctx, cancel, gerr := buildContext(ctx)
 	if gerr == nil {
 		defer cancel()
 		_, gerr = cglient.SetIntent(nctx, &pbg.SetIntentRequest{
@@ -75,7 +80,7 @@ func (s *Server) ClientUpdate(ctx context.Context, req *rcpb.ClientUpdateRequest
 			},
 		})
 	}
-	gramError.With(prometheus.Labels{"code": fmt.Sprintf("%v", status.Code(err))}).Inc()
+	gramError.With(prometheus.Labels{"code": fmt.Sprintf("%v", status.Code(gerr))}).Inc()
 
 	return &rcpb.ClientUpdateResponse{}, nil
 }
