@@ -80,7 +80,7 @@ func (s *Server) ClientUpdate(ctx context.Context, req *rcpb.ClientUpdateRequest
 			},
 		})
 	}
-	s.CtxLog(ctx, fmt.Sprintf("Error in setting intent: %v", gerr))
+	s.CtxLog(ctx, fmt.Sprintf("Error in setting intent(%v): %v", req.GetInstanceId(), gerr))
 	gramError.With(prometheus.Labels{"code": fmt.Sprintf("%v", status.Code(gerr))}).Inc()
 
 	return &rcpb.ClientUpdateResponse{}, nil
