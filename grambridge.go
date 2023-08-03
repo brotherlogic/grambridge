@@ -12,12 +12,14 @@ import (
 // Server main server type
 type Server struct {
 	*goserver.GoServer
+	updateMap map[int32]int64
 }
 
 // Init builds the server
 func Init() *Server {
 	s := &Server{
-		GoServer: &goserver.GoServer{},
+		GoServer:  &goserver.GoServer{},
+		updateMap: make(map[int32]int64),
 	}
 	return s
 }

@@ -70,18 +70,21 @@ func (s *Server) ClientUpdate(ctx context.Context, req *rcpb.ClientUpdateRequest
 		return nil, err
 	}
 
-	nctx, cancel, gerr := buildContext(ctx)
-	if gerr == nil {
-		defer cancel()
-		_, gerr = cglient.SetIntent(nctx, &pbg.SetIntentRequest{
-			InstanceId: int64(req.GetInstanceId()),
-			Intent: &pbg.Intent{
-				CleanTime: resp.GetRecord().GetMetadata().GetLastCleanDate(),
-			},
-		})
+	if s.updateMap[req.GetInstanceId()] < resp.GetRecord().GetMetadata().GetLastUpdateTime() {
+		nctx, cancel, gerr := buildContext(ctx)
+		if gerr == nil {
+			defer cancel()
+			_, gerr = cglient.SetIntent(nctx, &pbg.SetIntentRequest{
+				InstanceId: int64(req.GetInstanceId()),
+				Intent: &pbg.Intent{
+					CleanTime: resp.GetRecord().GetMetadata().GetLastCleanDate(),
+				},
+			})
+		}
+		s.CtxLog(ctx, fmt.Sprintf("Error in setting intent(%v): %v", req.GetInstanceId(), gerr))
+		gramError.With(prometheus.Labels{"code": fmt.Sprintf("%v", status.Code(gerr))}).Inc()
+		s.updateMap[req.GetInstanceId()] = resp.GetRecord().GetMetadata().GetLastUpdateTime()
 	}
-	s.CtxLog(ctx, fmt.Sprintf("Error in setting intent(%v): %v", req.GetInstanceId(), gerr))
-	gramError.With(prometheus.Labels{"code": fmt.Sprintf("%v", status.Code(gerr))}).Inc()
 
 	return &rcpb.ClientUpdateResponse{}, nil
 }
