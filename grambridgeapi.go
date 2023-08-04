@@ -24,6 +24,11 @@ var (
 		Name: "grambridge_error",
 		Help: "The size of the print queue",
 	}, []string{"code"})
+
+	cacheSize = promauto.NewGauge(prometheus.GaugeOpts{
+		Name: "grambridge_cache",
+		Help: "The size of the gram cache",
+	})
 )
 
 func buildContext(ctx context.Context) (context.Context, context.CancelFunc, error) {
@@ -84,6 +89,7 @@ func (s *Server) ClientUpdate(ctx context.Context, req *rcpb.ClientUpdateRequest
 		s.CtxLog(ctx, fmt.Sprintf("Error in setting intent(%v): %v", req.GetInstanceId(), gerr))
 		gramError.With(prometheus.Labels{"code": fmt.Sprintf("%v", status.Code(gerr))}).Inc()
 		s.updateMap[req.GetInstanceId()] = resp.GetRecord().GetMetadata().GetLastUpdateTime()
+		cacheSize.Set(float64(len(s.updateMap)))
 	}
 
 	return &rcpb.ClientUpdateResponse{}, nil
