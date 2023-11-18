@@ -2223,8 +2223,8 @@ github.com/brotherlogic/gobuildslave v0.0.0-20231020041201-2449c424b596/go.mod h
 github.com/brotherlogic/gobuildslave v0.0.0-20231027051415-c737ae9b1bdb/go.mod h1:YXDX/BtmvaR3jeFCfocvpq8YbwsM//Lbl6rnsys3aTI=
 github.com/brotherlogic/gobuildslave v0.0.0-20231103054005-b33bffbc3073/go.mod h1:7duFegAlnrbJQY1OEjaZZbKuabz2Sgk0aSoj41FBLxI=
 github.com/brotherlogic/gobuildslave v0.0.0-20231110054949-269f8cb8bc78/go.mod h1:eaZBZGvbkDlsYTzn0NZ6SaC889wFjR+Z1uZLBiAhTF4=
-github.com/brotherlogic/gobuildslave v0.0.0-20231117223014-9630d5b0b31b h1:Y8Y/nZiZf7LiSy/4v+h7JXy8n4L3sERIGcJnZPNOtpU=
-github.com/brotherlogic/gobuildslave v0.0.0-20231117223014-9630d5b0b31b/go.mod h1:qg86mIPnrkehS3SthyoLS0eywpEg5RDc+CmCEK7H3rc=
+github.com/brotherlogic/gobuildslave v0.0.0-20231118001706-2fd5552482fa h1:Mxr0pW0UOuo07KFHO3yN7o2vxPZ/0RnNt3j5whzhQ6Q=
+github.com/brotherlogic/gobuildslave v0.0.0-20231118001706-2fd5552482fa/go.mod h1:GSLdL826DHgP1os+rcpD2scX3HG9IuapeA23Pn/WfWI=
 github.com/brotherlogic/godiscogs v0.0.0-20201012230422-e6d22566e955/go.mod h1:n/6nBOsxU6shAcHwC8L557pGTmKwfdUx/zueje86vCE=
 github.com/brotherlogic/godiscogs v0.0.0-20210110190906-0bfce639dbb9/go.mod h1:n/6nBOsxU6shAcHwC8L557pGTmKwfdUx/zueje86vCE=
 github.com/brotherlogic/godiscogs v0.0.0-20210518132442-05fcf2d616b0/go.mod h1:n/6nBOsxU6shAcHwC8L557pGTmKwfdUx/zueje86vCE=
@@ -2361,8 +2361,8 @@ github.com/brotherlogic/goserver v0.0.0-20230530030554-6cec644064c2/go.mod h1:PX
 github.com/brotherlogic/goserver v0.0.0-20230619155835-969c746dba11/go.mod h1:PXiSCAIMpTFPvUu1TUUZXzPqpwoopeduP57Gohd1gxI=
 github.com/brotherlogic/goserver v0.0.0-20230726200050-779ae6811580 h1:NmX2QHbrsmEs7hDmBaoZaiEAdIpr04tRKPDnAptx21s=
 github.com/brotherlogic/goserver v0.0.0-20230726200050-779ae6811580/go.mod h1:PXiSCAIMpTFPvUu1TUUZXzPqpwoopeduP57Gohd1gxI=
-github.com/brotherlogic/gramophile v0.484.0 h1:JitSsasjJGYpxHmfqNdAKdG7dIGxhypmUcWx+50q71k=
-github.com/brotherlogic/gramophile v0.484.0/go.mod h1:y0hf04KYH6/RTl1jruAmPN4oGJ+vrqplv4yKOY2LTfk=
+github.com/brotherlogic/gramophile v0.486.0 h1:p9QuxHwA7k7804dIxYrN+uwh5VvO9BAQugkG/HvRrJ0=
+github.com/brotherlogic/gramophile v0.486.0/go.mod h1:y0hf04KYH6/RTl1jruAmPN4oGJ+vrqplv4yKOY2LTfk=
 github.com/brotherlogic/keymapper v0.0.0-20201116203852-f939ef86e1a2/go.mod h1:bZEHwfvamDSiweU+qiuNXmK5hUteKykayCtBVEOcq1U=
 github.com/brotherlogic/keymapper v0.0.0-20210311144023-8fb7e9401321/go.mod h1:cUAjkXcFmwSRCtsgbM/vmBu+rRexe1YOw5/PmGDwFw8=
 github.com/brotherlogic/keymapper v0.0.0-20210820140329-0a4c6cea65e8/go.mod h1:h1g13dewznZrv1+SHrh360wy+dK6iXS5042TiC8b4bY=
