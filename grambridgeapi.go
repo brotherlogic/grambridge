@@ -11,7 +11,6 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/status"
 
 	pbg "github.com/brotherlogic/gramophile/proto"
 	rcpb "github.com/brotherlogic/recordcollection/proto"
@@ -62,35 +61,14 @@ func (s *Server) ClientUpdate(ctx context.Context, req *rcpb.ClientUpdateRequest
 	}
 	defer conn.Close()
 
-	cglient := pbg.NewGramophileEServiceClient(conn)
-
-	conn2, err := s.FDialServer(ctx, "recordcollection")
-	if err != nil {
-		return nil, err
+	gclient := pbg.NewGramophileEServiceClient(conn)
+	nctx, cancel, gerr := buildContext(ctx)
+	if gerr != nil {
+		return nil, gerr
 	}
-	defer conn2.Close()
-	rcclient := rcpb.NewRecordCollectionServiceClient(conn2)
-	resp, err := rcclient.GetRecord(ctx, &rcpb.GetRecordRequest{InstanceId: req.GetInstanceId()})
-	if err != nil {
-		return nil, err
-	}
+	defer cancel()
 
-	if s.updateMap[req.GetInstanceId()] < resp.GetRecord().GetMetadata().GetLastUpdateTime() {
-		nctx, cancel, gerr := buildContext(ctx)
-		if gerr == nil {
-			defer cancel()
-			_, gerr = cglient.SetIntent(nctx, &pbg.SetIntentRequest{
-				InstanceId: int64(req.GetInstanceId()),
-				Intent: &pbg.Intent{
-					CleanTime: resp.GetRecord().GetMetadata().GetLastCleanDate(),
-				},
-			})
-		}
-		s.CtxLog(ctx, fmt.Sprintf("Error in setting intent(%v): %v", req.GetInstanceId(), gerr))
-		gramError.With(prometheus.Labels{"code": fmt.Sprintf("%v", status.Code(gerr))}).Inc()
-		s.updateMap[req.GetInstanceId()] = resp.GetRecord().GetMetadata().GetLastUpdateTime()
-		cacheSize.Set(float64(len(s.updateMap)))
-	}
+	_, err = gclient.RefreshRecord(nctx, &pbg.RefreshRecordRequest{InstanceId: int64(req.GetInstanceId())})
 
-	return &rcpb.ClientUpdateResponse{}, nil
+	return &rcpb.ClientUpdateResponse{}, err
 }
