@@ -9,8 +9,10 @@ import (
 	"github.com/golang/protobuf/proto"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/status"
 
 	pbg "github.com/brotherlogic/gramophile/proto"
 	rcpb "github.com/brotherlogic/recordcollection/proto"
@@ -69,6 +71,11 @@ func (s *Server) ClientUpdate(ctx context.Context, req *rcpb.ClientUpdateRequest
 	defer cancel()
 
 	_, err = gclient.RefreshRecord(nctx, &pbg.RefreshRecordRequest{InstanceId: int64(req.GetInstanceId())})
+
+	// AlreadyExists should be a soft error - swallow this ehre
+	if status.Code(err) == codes.AlreadyExists {
+		return &rcpb.ClientUpdateResponse{}, nil
+	}
 
 	return &rcpb.ClientUpdateResponse{}, err
 }
