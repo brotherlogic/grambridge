@@ -72,6 +72,8 @@ func (s *Server) ClientUpdate(ctx context.Context, req *rcpb.ClientUpdateRequest
 
 	_, err = gclient.RefreshRecord(nctx, &pbg.RefreshRecordRequest{InstanceId: int64(req.GetInstanceId())})
 
+	s.CtxLog(ctx, fmt.Sprintf("Refreshed %v -> %v", req.GetInstanceId(), err))
+
 	// AlreadyExists should be a soft error - swallow this ehre
 	if status.Code(err) == codes.AlreadyExists {
 		return &rcpb.ClientUpdateResponse{}, nil
