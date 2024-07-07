@@ -70,7 +70,7 @@ func (s *Server) ClientUpdate(ctx context.Context, req *rcpb.ClientUpdateRequest
 	}
 	defer cancel()
 
-	_, err = gclient.RefreshRecord(nctx, &pbg.RefreshRecordRequest{InstanceId: int64(req.GetInstanceId())})
+	_, err = gclient.RefreshRecord(nctx, &pbg.RefreshRecordRequest{InstanceId: int64(req.GetInstanceId()), JustState: true})
 
 	s.CtxLog(ctx, fmt.Sprintf("Refreshed %v -> %v", req.GetInstanceId(), err))
 
