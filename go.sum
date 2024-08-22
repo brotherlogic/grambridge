@@ -20,8 +20,8 @@ github.com/brotherlogic/godiscogs v0.0.0-20240818210034-6e072f0f7a47 h1:oNp8fFPz
 github.com/brotherlogic/godiscogs v0.0.0-20240818210034-6e072f0f7a47/go.mod h1:4wYe3uogEJqP77td2b2j69c+TLcSDrqgd5pqj7vlb6U=
 github.com/brotherlogic/goserver v0.0.0-20240303220030-80da220f0393 h1:URH8Z026zIMp4jli5l0AdRpxorjYMAOzA3zf2eifYW8=
 github.com/brotherlogic/goserver v0.0.0-20240303220030-80da220f0393/go.mod h1:DQcHpGZOjqnapi7JCYxmpOebkVjqgpfLuPNNNquy4Z0=
-github.com/brotherlogic/gramophile v0.957.0 h1:LW7BeC/U95pOtKVb4n/L6Qfar1+zzoHzwaDXNhti1PI=
-github.com/brotherlogic/gramophile v0.957.0/go.mod h1:k+spODzC7GBnV4vvF5AyA0Jt31IM8Nhb5h/4/rsPRA4=
+github.com/brotherlogic/gramophile v0.960.0 h1:HMElulujNmhNNzWseHHc6/Tik4eIckvgAcVcEOARfzw=
+github.com/brotherlogic/gramophile v0.960.0/go.mod h1:k+spODzC7GBnV4vvF5AyA0Jt31IM8Nhb5h/4/rsPRA4=
 github.com/brotherlogic/keystore v0.0.0-20240508161349-814b3200b126 h1:6e12Cl80VtMghgEyTyx1tZB1mUSSBHeLhKvikwb7kIQ=
 github.com/brotherlogic/keystore v0.0.0-20240508161349-814b3200b126/go.mod h1:2JK2kJhI5ler7e7M1WtIpIkiNGG2qy8V6X7VZLCsd5k=
 github.com/brotherlogic/lock v0.0.0-20240819160337-b61a8c623582 h1:GWTPE/MC+awUHvG1BMR5g0qRmYyQljwEsJZkC4gNrNw=

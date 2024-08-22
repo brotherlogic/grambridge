@@ -6,7 +6,7 @@ toolchain go1.23.0
 
 require (
 	github.com/brotherlogic/goserver v0.0.0-20240303220030-80da220f0393
-	github.com/brotherlogic/gramophile v0.957.0
+	github.com/brotherlogic/gramophile v0.960.0
 	github.com/brotherlogic/recordcollection v0.0.0-20240820211755-1e4ee0b03bfc
 	github.com/golang/protobuf v1.5.4
 	github.com/prometheus/client_golang v1.20.1
