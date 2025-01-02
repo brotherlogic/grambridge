@@ -5,7 +5,7 @@ go 1.23.2
 require (
 	github.com/brotherlogic/goserver v0.0.0-20240826215223-fccbac46b3d4
 	github.com/brotherlogic/gramophile v0.1088.0
-	github.com/brotherlogic/recordcollection v0.0.0-20250102184105-8f015d4d5b61
+	github.com/brotherlogic/recordcollection v0.0.0-20250102184751-1aa18eacdd78
 	github.com/golang/protobuf v1.5.4
 	github.com/prometheus/client_golang v1.20.5
 	golang.org/x/net v0.33.0
