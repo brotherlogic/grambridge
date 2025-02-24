@@ -14,18 +14,18 @@ require (
 
 require (
 	github.com/beorn7/perks v1.0.1 // indirect
-	github.com/brotherlogic/buildserver v0.0.0-20250224151521-32a800c770f1 // indirect
+	github.com/brotherlogic/buildserver v0.0.0-20250224205124-44b628bc8c3c // indirect
 	github.com/brotherlogic/datastore v0.0.0-20250113225754-a9cab19c721e // indirect
 	github.com/brotherlogic/discogs v0.0.0-20250108144950-fc78f5083d93 // indirect
 	github.com/brotherlogic/discovery v0.0.0-20241109204028-02908558af09 // indirect
-	github.com/brotherlogic/dstore v0.0.0-20250224141325-a8f150ff6b29 // indirect
-	github.com/brotherlogic/githubcard v0.0.0-20250224151044-03b259cc26ee // indirect
+	github.com/brotherlogic/dstore v0.0.0-20250224224728-96fbc7267720 // indirect
+	github.com/brotherlogic/githubcard v0.0.0-20250224204503-4e9cb3ad7ffc // indirect
 	github.com/brotherlogic/githubridge v0.2848.0 // indirect
-	github.com/brotherlogic/gobuildslave v0.0.0-20250224150249-dc40c974e138 // indirect
+	github.com/brotherlogic/gobuildslave v0.0.0-20250224230043-8538cc83b231 // indirect
 	github.com/brotherlogic/godiscogs v0.0.0-20250131163651-1e34c776a68e // indirect
 	github.com/brotherlogic/keystore v0.0.0-20240508161349-814b3200b126 // indirect
-	github.com/brotherlogic/lock v0.0.0-20250224131648-bdf9d6f3e23f // indirect
-	github.com/brotherlogic/logging v0.0.0-20250224155943-a2b40be3f9c5 // indirect
+	github.com/brotherlogic/lock v0.0.0-20250224203454-16f037e7ee49 // indirect
+	github.com/brotherlogic/logging v0.0.0-20250224230049-d5c5c1b09513 // indirect
 	github.com/brotherlogic/monitor v0.0.0-20221025152653-c10877c5f9e6 // indirect
 	github.com/brotherlogic/versionserver v0.0.0-20221025154054-c9bcd41be2f2 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
@@ -38,6 +38,6 @@ require (
 	github.com/struCoder/pidusage v0.2.1 // indirect
 	golang.org/x/sys v0.30.0 // indirect
 	golang.org/x/text v0.22.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20250219182151-9fdb1cabc7b2 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20250224174004-546df14abb99 // indirect
 	google.golang.org/protobuf v1.36.5 // indirect
 )
