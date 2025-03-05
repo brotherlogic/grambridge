@@ -4,17 +4,17 @@ go 1.23.2
 
 require (
 	github.com/brotherlogic/goserver v0.0.0-20250123145056-95c6fbb2310a
-	github.com/brotherlogic/gramophile v0.1118.0
+	github.com/brotherlogic/gramophile v0.1119.0
 	github.com/brotherlogic/recordcollection v0.0.0-20250227174213-ce20ec909d87
 	github.com/golang/protobuf v1.5.4
 	github.com/prometheus/client_golang v1.21.1
-	golang.org/x/net v0.36.0
+	golang.org/x/net v0.37.0
 	google.golang.org/grpc v1.71.0
 )
 
 require (
 	github.com/beorn7/perks v1.0.1 // indirect
-	github.com/brotherlogic/buildserver v0.0.0-20250304212710-7a56950bb1dd // indirect
+	github.com/brotherlogic/buildserver v0.0.0-20250305184943-0ef554c8d6cb // indirect
 	github.com/brotherlogic/datastore v0.0.0-20250113225754-a9cab19c721e // indirect
 	github.com/brotherlogic/discogs v0.0.0-20250108144950-fc78f5083d93 // indirect
 	github.com/brotherlogic/discovery v0.0.0-20241109204028-02908558af09 // indirect
@@ -36,8 +36,8 @@ require (
 	github.com/prometheus/common v0.62.0 // indirect
 	github.com/prometheus/procfs v0.15.1 // indirect
 	github.com/struCoder/pidusage v0.2.1 // indirect
-	golang.org/x/sys v0.30.0 // indirect
-	golang.org/x/text v0.22.0 // indirect
+	golang.org/x/sys v0.31.0 // indirect
+	golang.org/x/text v0.23.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20250303144028-a0af3efb3deb // indirect
 	google.golang.org/protobuf v1.36.5 // indirect
 )
