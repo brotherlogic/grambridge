@@ -14,8 +14,10 @@ import (
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 
+	pbgd "github.com/brotherlogic/godiscogs/proto"
 	pbg "github.com/brotherlogic/gramophile/proto"
 	rcpb "github.com/brotherlogic/recordcollection/proto"
+
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
 )
@@ -70,13 +72,29 @@ func (s *Server) ClientUpdate(ctx context.Context, req *rcpb.ClientUpdateRequest
 	}
 	defer cancel()
 
-	_, err = gclient.RefreshRecord(nctx, &pbg.RefreshRecordRequest{InstanceId: int64(req.GetInstanceId()), JustState: true})
+	resp, err := gclient.RefreshRecord(nctx, &pbg.RefreshRecordRequest{InstanceId: int64(req.GetInstanceId()), JustState: true})
 
 	s.CtxLog(ctx, fmt.Sprintf("Refreshed %v -> %v", req.GetInstanceId(), err))
 
 	// AlreadyExists should be a soft error - swallow this ehre
 	if status.Code(err) == codes.AlreadyExists {
 		return &rcpb.ClientUpdateResponse{}, nil
+	}
+
+	if resp.GetSaleId() > 0 {
+		conn, err := s.FDialServer(ctx, "recordcollection")
+		if err != nil {
+			return nil, err
+		}
+		defer conn.Close()
+		client := rcpb.NewRecordCollectionServiceClient(conn)
+		_, err = client.UpdateRecord(ctx, &rcpb.UpdateRecordRequest{
+			Reason: "updating from grambridge",
+			Update: &rcpb.Record{
+				Release:  &pbgd.Release{InstanceId: req.GetInstanceId()},
+				Metadata: &rcpb.ReleaseMetadata{SaleId: resp.GetSaleId()}}})
+		return &rcpb.ClientUpdateResponse{}, err
+
 	}
 
 	return &rcpb.ClientUpdateResponse{}, err
