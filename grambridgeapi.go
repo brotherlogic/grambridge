@@ -86,6 +86,7 @@ func (s *Server) ClientUpdate(ctx context.Context, req *rcpb.ClientUpdateRequest
 		if err != nil {
 			return nil, err
 		}
+		defer conn.Close()
 		client := rcpb.NewRecordCollectionServiceClient(conn)
 		_, err = client.UpdateRecord(ctx, &rcpb.UpdateRecordRequest{
 			Reason: "updating from grambridge",
