@@ -91,8 +91,11 @@ func (s *Server) ClientUpdate(ctx context.Context, req *rcpb.ClientUpdateRequest
 		_, err = client.UpdateRecord(ctx, &rcpb.UpdateRecordRequest{
 			Reason: "updating from grambridge",
 			Update: &rcpb.Record{
-				Release:  &pbgd.Release{InstanceId: req.GetInstanceId()},
-				Metadata: &rcpb.ReleaseMetadata{SaleId: resp.GetSaleId()}}})
+				Release: &pbgd.Release{InstanceId: req.GetInstanceId()},
+				Metadata: &rcpb.ReleaseMetadata{
+					SaleId:    resp.GetSaleId(),
+					HighPrice: resp.GetHighPrice(),
+				}}})
 		return &rcpb.ClientUpdateResponse{}, err
 
 	}
