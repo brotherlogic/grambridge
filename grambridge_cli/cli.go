@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"strconv"
@@ -29,7 +30,7 @@ func main() {
 		if err != nil {
 			log.Fatalf("Error on GET: %v", err)
 		}
-		log.Printf("%v", r)
+		fmt.Printf("%v\n", r)
 
 	}
 }
