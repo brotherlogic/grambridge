@@ -81,13 +81,19 @@ func (s *Server) ClientUpdate(ctx context.Context, req *rcpb.ClientUpdateRequest
 		return &rcpb.ClientUpdateResponse{}, nil
 	}
 
-	if resp.GetSaleId() > 0 {
-		conn, err := s.FDialServer(ctx, "recordcollection")
-		if err != nil {
-			return nil, err
-		}
-		defer conn.Close()
-		client := rcpb.NewRecordCollectionServiceClient(conn)
+	conn, err = s.FDialServer(ctx, "recordcollection")
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	client := rcpb.NewRecordCollectionServiceClient(conn)
+	rec, err := client.GetRecord(ctx, &rcpb.GetRecordRequest{InstanceId: req.GetInstanceId()})
+	if err != nil {
+		s.CtxLog(ctx, fmt.Sprintf("Error getting record %v: %v", req.GetInstanceId(), err))
+		return nil, err
+	}
+
+	if resp.GetSaleId() > 0 || resp.GetHighPrice() != rec.GetRecord().GetMetadata().GetHighPrice() {
 		_, err = client.UpdateRecord(ctx, &rcpb.UpdateRecordRequest{
 			Reason: "updating from grambridge",
 			Update: &rcpb.Record{
