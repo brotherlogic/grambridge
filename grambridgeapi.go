@@ -94,6 +94,7 @@ func (s *Server) ClientUpdate(ctx context.Context, req *rcpb.ClientUpdateRequest
 	}
 
 	if resp.GetSaleId() > 0 || resp.GetHighPrice() != rec.GetRecord().GetMetadata().GetHighPrice() {
+		s.CtxLog(ctx, fmt.Sprintf("Updating %v", rec.GetRecord()))
 		_, err = client.UpdateRecord(ctx, &rcpb.UpdateRecordRequest{
 			Reason: "updating from grambridge",
 			Update: &rcpb.Record{
