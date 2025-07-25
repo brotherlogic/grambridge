@@ -26,7 +26,7 @@ var (
 	gramError = promauto.NewGaugeVec(prometheus.GaugeOpts{
 		Name: "grambridge_error",
 		Help: "The size of the print queue",
-	}, []string{"code"})
+	}, []string{"code", "iid"})
 
 	cacheSize = promauto.NewGauge(prometheus.GaugeOpts{
 		Name: "grambridge_cache",
@@ -73,6 +73,9 @@ func (s *Server) ClientUpdate(ctx context.Context, req *rcpb.ClientUpdateRequest
 	defer cancel()
 
 	resp, err := gclient.RefreshRecord(nctx, &pbg.RefreshRecordRequest{InstanceId: int64(req.GetInstanceId()), JustState: true})
+	if err != nil {
+		gramError.With(prometheus.Labels{"code": fmt.Sprintf("%v", status.Code(err)), "iid": fmt.Sprintf("%v", req.GetInstanceId())}).Inc()
+	}
 
 	s.CtxLog(ctx, fmt.Sprintf("Refreshed %v -> %v", req.GetInstanceId(), err))
 
