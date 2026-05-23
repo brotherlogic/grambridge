@@ -26,7 +26,7 @@ func main() {
 	case "ping":
 		id, _ := strconv.ParseInt(os.Args[2], 10, 32)
 		sclient := pbrc.NewClientUpdateServiceClient(conn)
-		r, err := sclient.ClientUpdate(ctx, &pbrc.ClientUpdateRequest{InstanceId: int32(id)})
+		r, err := sclient.ClientUpdate(ctx, &pbrc.ClientUpdateRequest{InstanceId: int64(id)})
 		if err != nil {
 			log.Fatalf("Error on GET: %v", err)
 		}
